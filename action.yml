@@ -89,8 +89,9 @@ runs:
           esac
           pip install "umbra-core==$VER"
         else
-          # Pin a hardened minimum by default (contains the security fixes).
-          pip install "umbra-core>=0.1.3"
+          # Pin a hardened minimum by default. 0.3.0+ carries the capability graph,
+          # G1/G2/G3 gates, and the canonical `umbra comment` PR-comment renderer.
+          pip install "umbra-core>=0.3.0"
         fi
 
     - name: Stage the PR change as a working-tree diff
@@ -164,6 +165,22 @@ runs:
           ${{ env.OUT }}/umbra-report.json
         if-no-files-found: ignore
 
+    - name: Render the canonical Umbra PR comment
+      if: always() && github.event_name == 'pull_request'
+      shell: bash
+      run: |
+        # Render the canonical Admission Decision Pack comment from umbra-core, so
+        # the Action posts the exact template the architecture freezes (identical
+        # to the hosted UI / CLI). Never interpolate untrusted data into the shell.
+        set -euo pipefail
+        OUT="${OUT:-${RUNNER_TEMP:-/tmp}/umbra}"
+        if [ -f "$OUT/umbra-report.json" ]; then
+          umbra comment "$OUT/umbra-report.json" > "$OUT/umbra-comment.md" || \
+            echo "Umbra: admission did not complete; see the workflow logs and the receipt artifact." > "$OUT/umbra-comment.md"
+        else
+          echo "Umbra: no admission report was produced; see the workflow logs." > "$OUT/umbra-comment.md"
+        fi
+
     - name: Comment the verdict on the PR
       if: always() && github.event_name == 'pull_request'
       uses: actions/github-script@v7
@@ -172,26 +189,8 @@ runs:
           const fs = require('fs');
           const path = require('path');
           const out = process.env.OUT || '';
-          let report = {};
-          try { report = JSON.parse(fs.readFileSync(path.join(out, 'umbra-report.json'),'utf8')).report; } catch (e) {}
-          const r = report || {};
-          const cr = r.contract_result || {};
-          const tb = r.trust_boundary || {};
-          const v = r.verifier || {};
-          const badge = { 0: '🔴 Observe (L0)', 1: '🟡 Analyze (L1)', 2: '🟢 Branch-PR (L2)' }[r.authority_level] || '—';
-          const body = [
-            '## Umbra Admission',
-            '',
-            `**Earned authority:** ${badge}`,
-            '',
-            `- **Executor:** \`${r.executor || 'n/a'}\``,
-            `- **Contract:** ${cr.passed ? 'PASS' : 'VIOLATED'}`,
-            `- **Trust boundary:** ${tb.clean ? 'clean' : `${tb.quarantined_count} injected line(s) quarantined on disk`}`,
-            `- **Independent verifier:** ${v.blocked ? 'BLOCKED' : (v.status || 'n/a')}`,
-            `- **Outcome:** ${r.outcome || ''}`,
-            '',
-            `> Signed receipt attached as the \`umbra-receipt\` artifact. \`auto_merge\` is always false — a human merges. Umbra governs the agent; it never merges.`,
-          ].join('\n');
+          let body = 'Umbra: no admission report was produced.';
+          try { body = fs.readFileSync(path.join(out, 'umbra-comment.md'), 'utf8'); } catch (e) {}
           if (context.issue.number) {
             await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
           }

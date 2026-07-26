@@ -3,6 +3,19 @@
 Follows [Keep a Changelog](https://keepachangelog.com/) / [SemVer](https://semver.org/).
 Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
+## [Unreleased]
+
+### Changed
+
+- The PR comment is now rendered by **umbra-core** (`umbra comment`) from the
+  Admission Decision Pack, so the Action posts the exact canonical template the
+  architecture freezes — identical to the hosted UI and CLI (Executor · Contract ·
+  Trust boundary · Checks · Verifier · Proof gates · Receipt · Auto-merge, machine-
+  readable reasons, and the L2/L1/L0 conditional line). No more Action-specific
+  comment format that could drift from the receipt.
+- Default install pin raised to **`umbra-core>=0.3.0`** (capability graph, G1/G2/G3
+  proof gates, and the `umbra comment` renderer).
+
 ## [0.1.3] — 2026-07-22
 
 ### Security
