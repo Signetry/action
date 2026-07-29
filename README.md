@@ -76,6 +76,8 @@ receipt; it falls back to a lower tier only if the sandbox can't initialize). Th
 governance logic, contract, verifier, and receipts all live in
 [umbra-core](https://github.com/bkd-dotcom/umbra-core).
 
+Part of the [Umbra platform](https://github.com/bkd-dotcom/umbra-umbrella) — see the umbrella for the full integration catalog and compatibility matrix.
+
 ## License
 
 [MIT](LICENSE) © 2026 Binay Dalai.
