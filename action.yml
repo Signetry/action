@@ -30,6 +30,14 @@ inputs:
     description: "If 'true', code-executing checks (npm/pip install, go/cargo build) are refused unless a real filesystem/network sandbox is available (fail closed)."
     required: false
     default: "false"
+  scan:
+    description: "If 'true', also run the umbra SAST detection engine over the checkout and upload SARIF (uploaded to code scanning if the workflow has security-events: write). Deterministic, offline; requires umbra-core >= 0.5.0."
+    required: false
+    default: "false"
+  scan-fail-on:
+    description: "With scan enabled, exit non-zero if any finding meets/exceeds this severity (critical|high|medium|low|info). Blank = report-only."
+    required: false
+    default: ""
   python-version:
     description: "Python version to run on."
     required: false
@@ -42,6 +50,12 @@ outputs:
   receipt-hash:
     description: "The canonical hash of the signed receipt."
     value: ${{ steps.admit.outputs.receipt_hash }}
+  sarif-file:
+    description: "Path to the SARIF file when scan is enabled (else empty)."
+    value: ${{ steps.scan.outputs.sarif_file }}
+  findings-count:
+    description: "Number of detection findings when scan is enabled (else 0)."
+    value: ${{ steps.scan.outputs.findings_count }}
 
 runs:
   using: "composite"
@@ -93,6 +107,50 @@ runs:
           # G1/G2/G3 gates, and the canonical `umbra comment` PR-comment renderer.
           pip install "umbra-core>=0.3.0"
         fi
+
+    - name: Detection scan (optional)
+      id: scan
+      if: ${{ inputs.scan == 'true' }}
+      shell: bash
+      env:
+        IN_SCAN_FAIL_ON: ${{ inputs.scan-fail-on }}
+      run: |
+        # Layered SAST over the checkout (deterministic, offline). Emits SARIF for
+        # code scanning and a findings count. Runs on the pristine checkout BEFORE
+        # the admission staging step, so it scans the PR head as-is. Requires
+        # umbra-core >= 0.5.0; older versions won't expose `umbra scan`.
+        set -euo pipefail
+        if ! umbra scan --help >/dev/null 2>&1; then
+          echo "::warning::Installed umbra-core has no 'scan' command (needs >= 0.5.0); skipping detection scan."
+          echo "sarif_file=" >> "$GITHUB_OUTPUT"; echo "findings_count=0" >> "$GITHUB_OUTPUT"; exit 0
+        fi
+        SOUT="${RUNNER_TEMP:-/tmp}/umbra-scan"; mkdir -p "$SOUT"
+        SARIF="$SOUT/umbra.sarif"
+        # Validate the severity input against a fixed set (no shell injection).
+        FAIL_ARG=""
+        case "${IN_SCAN_FAIL_ON:-}" in
+          "") : ;;
+          critical|high|medium|low|info) FAIL_ARG="--fail-on ${IN_SCAN_FAIL_ON}" ;;
+          *) echo "::error::Invalid scan-fail-on '${IN_SCAN_FAIL_ON}'"; exit 1 ;;
+        esac
+        umbra scan . --sarif -o "$SARIF" || true
+        COUNT=$(python -c "import json;print(len(json.load(open('$SARIF'))['runs'][0]['results']))" 2>/dev/null || echo 0)
+        echo "sarif_file=$SARIF" >> "$GITHUB_OUTPUT"
+        echo "findings_count=$COUNT" >> "$GITHUB_OUTPUT"
+        echo "SCAN_SARIF=$SARIF" >> "$GITHUB_ENV"
+        echo "umbra scan: $COUNT finding(s); SARIF at $SARIF"
+        # Report-only unless a severity gate is set.
+        if [ -n "$FAIL_ARG" ]; then
+          umbra scan . $FAIL_ARG >/dev/null || { echo "::error::umbra scan found finding(s) at/above ${IN_SCAN_FAIL_ON}"; exit 1; }
+        fi
+
+    - name: Upload SARIF to code scanning (optional)
+      if: ${{ inputs.scan == 'true' && env.SCAN_SARIF != '' }}
+      continue-on-error: true
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: ${{ env.SCAN_SARIF }}
+        category: umbra-scan
 
     - name: Stage the PR change as a working-tree diff
       shell: bash

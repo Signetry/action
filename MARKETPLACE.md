@@ -137,7 +137,9 @@ Without one, a conservative default applies. Full docs and the Python package
 | `agent` | `""` | Force `codex-cli` or `claude-code` to re-run the change; blank governs the existing PR diff. |
 | `signing-key` | `""` | Base64 Ed25519 key (32+ bytes) for stable receipts. |
 | `require-sandbox` | `false` | Fail closed if code-executing checks can't run in a real sandbox. |
-| `umbra-version` | latest (≥0.1.3) | Pin a specific `umbra-core` version; blank installs the latest hardened release. |
+| `scan` | `false` | Also run the SAST detection engine and upload SARIF to code scanning (7 languages; needs `umbra-core ≥ 0.5.0`, `security-events: write`). |
+| `scan-fail-on` | `""` | With `scan`, fail the check on findings at/above this severity. |
+| `umbra-version` | latest (≥0.5.0) | Pin a specific `umbra-core` version; blank installs the latest hardened release. |
 | `python-version` | `3.12` | Python to run on. |
 
 #### Outputs
@@ -146,6 +148,8 @@ Without one, a conservative default applies. Full docs and the Python package
 |---|---|
 | `authority-level` | The level the change earned (0/1/2). |
 | `receipt-hash` | Canonical hash of the signed receipt. |
+| `sarif-file` | Path to the SARIF file when `scan` is enabled. |
+| `findings-count` | Number of detection findings when `scan` is enabled. |
 
 #### Honest scope
 
