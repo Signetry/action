@@ -47,6 +47,31 @@ Add a `.umbra/admission.yaml` to your repo to declare the contract (allowed and
 forbidden paths, diff budget, required checks). Without one, a conservative
 default applies. See the [umbra-core docs](https://github.com/bkd-dotcom/umbra-core).
 
+### Also scan for vulnerabilities (SARIF → code scanning)
+
+Turn on `scan` to run the SAST detection engine over the PR and upload SARIF to
+GitHub code scanning alongside the admission verdict — deterministic, offline, and
+free (7 languages, cross-file taint):
+
+```yaml
+permissions:
+  contents: read
+  pull-requests: write
+  security-events: write        # to upload SARIF to code scanning
+jobs:
+  admit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with: { ref: ${{ github.event.pull_request.head.sha }}, fetch-depth: 0 }
+      - uses: bkd-dotcom/umbra-action@v1
+        with:
+          scan: "true"
+          scan-fail-on: "high"    # optional: fail the check on high+ findings
+          min-authority: "1"
+```
+
+
 ## Inputs
 
 | Input | Default | Description |
@@ -56,6 +81,8 @@ default applies. See the [umbra-core docs](https://github.com/bkd-dotcom/umbra-c
 | `agent` | `""` | Force `codex-cli` or `claude-code` to *re-run* the change. Blank governs the existing PR diff without invoking an agent. |
 | `signing-key` | `""` | Base64 Ed25519 key (32+ bytes) for stable receipts. Falls back to a dev key (honestly flagged). |
 | `require-sandbox` | `false` | Fail closed if code-executing checks (npm/pip install, go/cargo build) can't run in a real filesystem/network sandbox. |
+| `scan` | `false` | Also run the **SAST detection engine** over the checkout and upload SARIF to code scanning (7 languages, cross-file taint, deterministic/offline; needs `umbra-core >= 0.5.0`). |
+| `scan-fail-on` | `""` | With `scan`, fail the check if any finding is at/above this severity (`critical`/`high`/`medium`/`low`/`info`). Blank = report-only. |
 | `umbra-version` | latest | Pin a specific `umbra-core` PyPI version (blank installs the latest hardened release). |
 | `python-version` | `3.12` | Python to run on. |
 
@@ -65,6 +92,8 @@ default applies. See the [umbra-core docs](https://github.com/bkd-dotcom/umbra-c
 |---|---|
 | `authority-level` | The level the change earned (0/1/2). |
 | `receipt-hash` | Canonical hash of the signed receipt. |
+| `sarif-file` | Path to the SARIF file when `scan` is enabled (else empty). |
+| `findings-count` | Number of detection findings when `scan` is enabled (else 0). |
 
 ## How it works
 

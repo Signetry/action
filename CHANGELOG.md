@@ -5,6 +5,15 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
 ## [Unreleased]
 
+### Added
+
+- **Detection scan mode** (`scan: "true"`): runs the umbra-core SAST detection
+  engine over the checkout and uploads **SARIF** to GitHub code scanning alongside
+  the admission verdict — 7 languages, cross-file taint, deterministic and offline.
+  Optional `scan-fail-on` gates the check on a severity threshold; new outputs
+  `sarif-file` and `findings-count`. Requires `umbra-core >= 0.5.0` (older versions
+  skip scan with a warning). SARIF upload needs `security-events: write`.
+
 ### Changed
 
 - The PR comment is now rendered by **umbra-core** (`umbra comment`) from the
