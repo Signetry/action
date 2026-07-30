@@ -103,9 +103,10 @@ runs:
           esac
           pip install "umbra-core==$VER"
         else
-          # Pin a hardened minimum by default. 0.3.0+ carries the capability graph,
-          # G1/G2/G3 gates, and the canonical `umbra comment` PR-comment renderer.
-          pip install "umbra-core>=0.3.0"
+          # Pin a hardened minimum by default. 0.5.0+ carries the capability graph,
+          # G1/G2/G3 gates, the canonical `umbra comment` renderer, and the SAST
+          # detection engine (needed for `scan: true`).
+          pip install "umbra-core>=0.5.0"
         fi
 
     - name: Detection scan (optional)
