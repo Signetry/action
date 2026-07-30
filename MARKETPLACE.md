@@ -162,13 +162,18 @@ receipt. MIT licensed.
 
 ---
 
-## Release notes (for the v0.1.3 / v1 release body, if not already set)
+## Release notes (for the v0.2.0 / v1 release body)
 
 ```
-Umbra Admission v0.1.3 — govern any coding agent's PR with a signed receipt.
+Umbra Admission v0.2.0 — govern any coding agent's PR with a signed receipt, now
+with an optional built-in vulnerability scan.
 
 - Agent-agnostic admission pipeline: contract → injection quarantine →
   required checks → independent verifier → earned authority → Ed25519 receipt.
+- NEW: scan mode (scan: "true") runs the umbra-core SAST detection engine over the
+  PR and uploads SARIF to code scanning — 7 languages, cross-file taint,
+  deterministic and offline. Optional scan-fail-on gates the check; outputs
+  sarif-file and findings-count. Needs security-events: write.
 - Layered prompt-injection defense (patterns + structural carriers + full-file
   quarantine + optional semantic classifier).
 - Sandboxed checks on Linux (auto-installs bubblewrap); UMBRA_REQUIRE_SANDBOX
@@ -176,7 +181,8 @@ Umbra Admission v0.1.3 — govern any coding agent's PR with a signed receipt.
 - Posts a verdict comment, uploads the signed receipt, fails the check below the
   required authority. Never merges.
 
-Pin @v1 (moving) or @v0.1.3 (exact). Requires umbra-core (installed automatically).
+Pin @v1 (moving) or @v0.2.0 (exact). Requires umbra-core>=0.5.0 (installed
+automatically).
 ```
 
 ---
