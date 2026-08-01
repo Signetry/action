@@ -1,9 +1,12 @@
 # Umbra Admission — GitHub Action
 
+> **Copyright (c) 2026 Binay Dalai. All rights reserved.**
+> This repository is strictly for viewing and contributing to the original project. You may not use, copy, modify, distribute, or commercialize this code for your own personal or commercial projects without explicit written permission. Only the original author retains the right to use and monetize this project.
+
+
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Umbra%20Admission-purple?logo=github)](https://github.com/marketplace/actions/umbra-admission)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Latest release](https://img.shields.io/github/v/release/bkd-dotcom/umbra-action?sort=semver)](https://github.com/bkd-dotcom/umbra-action/releases)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 **Govern any coding agent's change to your repository, and attach a signed receipt.**
 
@@ -110,4 +113,4 @@ Part of the [Umbra platform](https://github.com/bkd-dotcom/umbra-umbrella) — s
 
 ## License
 
-[MIT](LICENSE) © 2026 Binay Dalai.
+**Copyright (c) 2026 Binay Dalai. All rights reserved.** This code is not open source. You may not use, copy, modify, distribute, or commercialize it for your own personal or commercial purposes without explicit written permission from the author, who alone retains the right to use and monetize this project. See [CONTRIBUTING.md](CONTRIBUTING.md).
