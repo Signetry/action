@@ -97,16 +97,18 @@ runs:
         set -euo pipefail
         VER="${IN_UMBRA_VERSION:-}"
         if [ -n "$VER" ]; then
-          # Validate: PEP 440-ish version, no shell metacharacters.
+          # Validate: a version tag or ref, no shell metacharacters.
           case "$VER" in
             *[!0-9.a-zA-Z_-]*) echo "::error::Invalid umbra-version '$VER'"; exit 1 ;;
           esac
-          pip install "umbra-core==$VER"
+          # Install the pinned tag from the source repository.
+          pip install "umbra-core @ git+https://github.com/bkd-dotcom/umbra-core@v$VER"
         else
-          # Pin a hardened minimum by default. 0.5.0+ carries the capability graph,
-          # G1/G2/G3 gates, the canonical `umbra comment` renderer, and the SAST
-          # detection engine (needed for `scan: true`).
-          pip install "umbra-core>=0.5.0"
+          # umbra-core is distributed from its source repository (All Rights Reserved;
+          # not published to PyPI). Install the latest release tag. 0.5.0+ carries the
+          # capability graph, G1/G2/G3 gates, the `umbra comment` renderer, and the
+          # SAST detection engine (needed for `scan: true`).
+          pip install "umbra-core @ git+https://github.com/bkd-dotcom/umbra-core@v0.5.3"
         fi
 
     - name: Detection scan (optional)
