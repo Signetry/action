@@ -5,6 +5,19 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
 ## [Unreleased]
 
+## [0.3.0] — 2026-07-30
+
+### Changed — licensing & distribution
+
+- **All Rights Reserved.** The MIT `LICENSE` was removed; this Action is no longer
+  open source. See the notice in the README and `CONTRIBUTING.md` (contributions are
+  made under a copyright-assignment agreement).
+- **Installs `umbra-core` from its source repo, not PyPI** — `umbra-core` was
+  removed from PyPI, so the Action now installs it via
+  `git+https://github.com/bkd-dotcom/umbra-core@v0.5.3` (default) or the tag given in
+  the `umbra-version` input. Fixes workflows that would otherwise fail after the PyPI
+  removal.
+
 ## [0.2.0] — 2026-07-30
 
 ### Added
