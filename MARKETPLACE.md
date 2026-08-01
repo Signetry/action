@@ -126,7 +126,7 @@ required_checks:
 ```
 
 Without one, a conservative default applies. Full docs and the Python package
-(`pip install umbra-core`) at **https://github.com/bkd-dotcom/umbra-core**.
+at **https://github.com/bkd-dotcom/umbra-core** (installed automatically from source; not on PyPI).
 
 #### Inputs
 
@@ -181,7 +181,7 @@ with an optional built-in vulnerability scan.
 - Posts a verdict comment, uploads the signed receipt, fails the check below the
   required authority. Never merges.
 
-Pin @v1 (moving) or @v0.2.0 (exact). Requires umbra-core>=0.5.0 (installed
+Pin @v1 (moving) or @v0.2.0 (exact). Requires umbra-core (installed automatically from the source repo; not on PyPI) (installed
 automatically).
 ```
 
