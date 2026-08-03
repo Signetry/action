@@ -115,3 +115,5 @@ Part of the [Umbra platform](https://github.com/bkd-dotcom/umbra-umbrella) — s
 ## License
 
 **Copyright (c) 2026 Binay Dalai. All rights reserved.** This code is not open source. You may not use, copy, modify, distribute, or commercialize it for your own personal or commercial purposes without explicit written permission from the author, who alone retains the right to use and monetize this project. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+<!-- cla verify 1785776502 -->
