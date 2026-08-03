@@ -5,6 +5,17 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
 ## [Unreleased]
 
+## [0.3.1] — 2026-08-03
+
+### Changed
+
+- Default `umbra-core` install pinned to `git+https://github.com/bkd-dotcom/umbra-core@v0.5.4`
+  (was `@v0.5.3`) following the umbra-core v0.5.4 source-available release.
+- The `umbra-version` input is documented as a **source version tag** (umbra-core
+  is source-available and installed from its source repo, not PyPI).
+- The advisory reviewer workflow installs `umbra-reviewer@v0.1.1` from source.
+- `@v1` moved to this release. No functional change to the admission pipeline.
+
 ## [0.3.0] — 2026-07-30
 
 ### Changed — licensing & distribution
