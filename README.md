@@ -87,7 +87,7 @@ jobs:
 | `require-sandbox` | `false` | Fail closed if code-executing checks (npm/pip install, go/cargo build) can't run in a real filesystem/network sandbox. |
 | `scan` | `false` | Also run the **SAST detection engine** over the checkout and upload SARIF to code scanning (7 languages, cross-file taint, deterministic/offline; needs `umbra-core >= 0.5.0`). |
 | `scan-fail-on` | `""` | With `scan`, fail the check if any finding is at/above this severity (`critical`/`high`/`medium`/`low`/`info`). Blank = report-only. |
-| `umbra-version` | latest | Pin a specific `umbra-core` PyPI version (blank installs the latest hardened release). |
+| `umbra-version` | latest | Pin a specific `umbra-core` version **tag** installed from source (blank installs the latest hardened release). umbra-core is source-available and not on PyPI. |
 | `python-version` | `3.12` | Python to run on. |
 
 ## Outputs
@@ -101,7 +101,8 @@ jobs:
 
 ## How it works
 
-This action is a thin wrapper over the `umbra-core` PyPI package. It stages the
+This action is a thin wrapper over `umbra-core` (source-available; installed from
+its source repo, not PyPI). It stages the
 PR's change as a working-tree diff, runs `umbra admit`, and enforces the earned
 authority. On Linux runners it installs bubblewrap so required checks run under a
 real filesystem/network **sandbox** (the tier is recorded truthfully in every

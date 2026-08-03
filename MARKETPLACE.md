@@ -181,8 +181,8 @@ with an optional built-in vulnerability scan.
 - Posts a verdict comment, uploads the signed receipt, fails the check below the
   required authority. Never merges.
 
-Pin @v1 (moving) or @v0.2.0 (exact). Requires umbra-core (installed automatically from the source repo; not on PyPI) (installed
-automatically).
+Pin @v1 (moving) or @v0.2.0 (exact). Requires umbra-core (installed automatically
+from the source repo; not on PyPI).
 ```
 
 ---

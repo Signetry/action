@@ -23,7 +23,7 @@ inputs:
     required: false
     default: ""
   umbra-version:
-    description: "Version of umbra-core to install from PyPI (e.g. '0.1.0'). Blank installs the latest."
+    description: "Version tag of umbra-core to install from source (e.g. '0.5.3'). Blank installs the latest hardened release. umbra-core is source-available (All Rights Reserved) and installed from its source repo, not PyPI."
     required: false
     default: ""
   require-sandbox:
