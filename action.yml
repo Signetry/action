@@ -108,7 +108,7 @@ runs:
           # not published to PyPI). Install the latest release tag. 0.5.0+ carries the
           # capability graph, G1/G2/G3 gates, the `umbra comment` renderer, and the
           # SAST detection engine (needed for `scan: true`).
-          pip install "umbra-core @ git+https://github.com/bkd-dotcom/umbra-core@v0.5.3"
+          pip install "umbra-core @ git+https://github.com/bkd-dotcom/umbra-core@v0.5.4"
         fi
 
     - name: Detection scan (optional)
