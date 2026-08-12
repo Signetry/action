@@ -5,6 +5,27 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
 ## [Unreleased]
 
+### Changed — rebrand to Signetry
+
+- **Rebranded from Umbra to Signetry.** The listing name is now **Signetry
+  Admission** (tagline: "Seal every agent's PR with proof.").
+- The kernel package is now **`signetry-core`** (was `umbra-core`), installed from
+  `git+https://github.com/Signetry/core@v0.6.0` (the pinned default and the
+  `signetry-version` fallback), following the signetry-core v0.6.0 release.
+- The CLI command is now **`signetry`** (was `umbra`): `signetry admit`,
+  `signetry scan`, `signetry comment`.
+- Environment variables renamed `UMBRA_*` → `SIGNETRY_*` (`SIGNETRY_SIGNING_KEY`,
+  `SIGNETRY_ENABLE_CLAUDE_CODE`, `SIGNETRY_ENABLE_CODEX_CLI`,
+  `SIGNETRY_REQUIRE_SANDBOX`).
+- Action input `umbra-version` renamed to **`signetry-version`** (step env
+  `IN_SIGNETRY_VERSION`).
+- Report/artifact filenames renamed (`signetry-report.json`,
+  `signetry-receipt.json`, `signetry-comment.md`, `signetry.sarif`); contract path
+  is now `.signetry/admission.yaml`.
+- Advisory reviewer workflow installs **`signetry-reviewer`** from
+  `git+https://github.com/Signetry/reviewer@v0.1.1`.
+- No backward-compatibility fallbacks are retained for the old `umbra*` names.
+
 ## [0.3.1] — 2026-08-03
 
 ### Changed
