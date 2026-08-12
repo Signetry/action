@@ -9,7 +9,7 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 
 ### Changed
 
-- Default `umbra-core` install pinned to `git+https://github.com/bkd-dotcom/umbra-core@v0.5.4`
+- Default `umbra-core` install pinned to `git+https://github.com/Signetry/core@v0.5.4`
   (was `@v0.5.3`) following the umbra-core v0.5.4 source-available release.
 - The `umbra-version` input is documented as a **source version tag** (umbra-core
   is source-available and installed from its source repo, not PyPI).
@@ -25,7 +25,7 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
   made under a copyright-assignment agreement).
 - **Installs `umbra-core` from its source repo, not PyPI** — `umbra-core` was
   removed from PyPI, so the Action now installs it via
-  `git+https://github.com/bkd-dotcom/umbra-core@v0.5.3` (default) or the tag given in
+  `git+https://github.com/Signetry/core@v0.5.3` (default) or the tag given in
   the `umbra-version` input. Fixes workflows that would otherwise fail after the PyPI
   removal.
 
@@ -80,5 +80,5 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 > `v0.1.0`–`v0.1.2` (exact pins) are superseded — upgrade to `@v1`. See
 > [SECURITY.md](SECURITY.md).
 
-[0.1.3]: https://github.com/bkd-dotcom/umbra-action/releases/tag/v0.1.3
-[0.1.0]: https://github.com/bkd-dotcom/umbra-action/releases/tag/v0.1.0
+[0.1.3]: https://github.com/Signetry/action/releases/tag/v0.1.3
+[0.1.0]: https://github.com/Signetry/action/releases/tag/v0.1.0
