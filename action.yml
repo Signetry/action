@@ -2,7 +2,7 @@ name: "Signetry Admission"
 description: "Seal every agent's PR with proof. Govern any coding agent's PR with an admission pipeline and a signed receipt. Never merges."
 author: "Binay Dalai"
 branding:
-  icon: "shield"
+  icon: "award"
   color: "purple"
 
 inputs:
