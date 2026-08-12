@@ -4,7 +4,7 @@ Everything needed to publish **Umbra Admission** to the GitHub Marketplace.
 Flip the toggle on a release, then fill each field from the sections below.
 
 How to publish (GitHub UI):
-1. Go to https://github.com/bkd-dotcom/umbra-action/releases → edit the latest
+1. Go to https://github.com/Signetry/action/releases → edit the latest
    release (`v0.1.3` / `v1`).
 2. Check **"Publish this Action to the GitHub Marketplace"**, accept the
    Developer Agreement.
@@ -103,7 +103,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-      - uses: bkd-dotcom/umbra-action@v1
+      - uses: Signetry/action@v1
         with:
           min-authority: "1"                                 # 0 observe · 1 analyze · 2 branch-PR
           signing-key: ${{ secrets.UMBRA_SIGNING_KEY }}      # optional: stable signed receipts
@@ -126,7 +126,7 @@ required_checks:
 ```
 
 Without one, a conservative default applies. Full docs and the Python package
-at **https://github.com/bkd-dotcom/umbra-core** (installed automatically from source; not on PyPI).
+at **https://github.com/Signetry/core** (installed automatically from source; not on PyPI).
 
 #### Inputs
 

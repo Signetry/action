@@ -6,12 +6,12 @@
 
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Umbra%20Admission-purple?logo=github)](https://github.com/marketplace/actions/umbra-admission)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
-[![Latest release](https://img.shields.io/github/v/release/bkd-dotcom/umbra-action?sort=semver)](https://github.com/bkd-dotcom/umbra-action/releases)
+[![Latest release](https://img.shields.io/github/v/release/Signetry/action?sort=semver)](https://github.com/Signetry/action/releases)
 
 **Govern any coding agent's change to your repository, and attach a signed receipt.**
 
 Every pull request — no matter which agent opened it (Claude Code, Codex, Cursor,
-Copilot, Devin, or a human) — is run through the [umbra-core](https://github.com/bkd-dotcom/umbra-core)
+Copilot, Devin, or a human) — is run through the [umbra-core](https://github.com/Signetry/core)
 admission pipeline:
 
 ```
@@ -41,7 +41,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0                       # base must be reachable for the diff
-      - uses: bkd-dotcom/umbra-action@v1
+      - uses: Signetry/action@v1
         with:
           min-authority: "1"                   # 0 observe · 1 analyze · 2 branch-PR
           signing-key: ${{ secrets.UMBRA_SIGNING_KEY }}   # optional: stable signed receipts
@@ -49,7 +49,7 @@ jobs:
 
 Add a `.umbra/admission.yaml` to your repo to declare the contract (allowed and
 forbidden paths, diff budget, required checks). Without one, a conservative
-default applies. See the [umbra-core docs](https://github.com/bkd-dotcom/umbra-core).
+default applies. See the [umbra-core docs](https://github.com/Signetry/core).
 
 ### Also scan for vulnerabilities (SARIF → code scanning)
 
@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with: { ref: ${{ github.event.pull_request.head.sha }}, fetch-depth: 0 }
-      - uses: bkd-dotcom/umbra-action@v1
+      - uses: Signetry/action@v1
         with:
           scan: "true"
           scan-fail-on: "high"    # optional: fail the check on high+ findings
@@ -108,9 +108,9 @@ authority. On Linux runners it installs bubblewrap so required checks run under 
 real filesystem/network **sandbox** (the tier is recorded truthfully in every
 receipt; it falls back to a lower tier only if the sandbox can't initialize). The
 governance logic, contract, verifier, and receipts all live in
-[umbra-core](https://github.com/bkd-dotcom/umbra-core).
+[umbra-core](https://github.com/Signetry/core).
 
-Part of the [Umbra platform](https://github.com/bkd-dotcom/umbra-umbrella) — see the umbrella for the full integration catalog and compatibility matrix.
+Part of the [Umbra platform](https://github.com/Signetry/signetry) — see the umbrella for the full integration catalog and compatibility matrix.
 
 ## License
 

@@ -19,9 +19,9 @@ fixed in `v0.1.3`. If you pinned an exact old tag, move to `@v1`.
 ## Reporting a vulnerability
 
 Do **not** open a public issue. Use private reporting:
-**https://github.com/bkd-dotcom/umbra-action/security/advisories/new**
+**https://github.com/Signetry/action/security/advisories/new**
 (or report core issues at
-https://github.com/bkd-dotcom/umbra-core/security/advisories/new).
+https://github.com/Signetry/core/security/advisories/new).
 
 ## Safe usage
 

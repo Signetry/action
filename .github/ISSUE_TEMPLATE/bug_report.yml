@@ -6,9 +6,9 @@ body:
     attributes:
       value: |
         For **security vulnerabilities** do NOT use this form — see
-        [SECURITY.md](https://github.com/bkd-dotcom/umbra-action/security/policy).
+        [SECURITY.md](https://github.com/Signetry/action/security/policy).
         Governance-logic bugs (contract, verifier, receipts) belong in
-        [umbra-core](https://github.com/bkd-dotcom/umbra-core/issues).
+        [umbra-core](https://github.com/Signetry/core/issues).
   - type: input
     id: version
     attributes:
