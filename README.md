@@ -1,11 +1,5 @@
 # Signetry Admission — GitHub Action
 
-> **Seal every agent's PR with proof.**
-
-> **Copyright (c) 2026 Binay Dalai. All rights reserved.**
-> This repository is strictly for viewing and contributing to the original project. You may not use, copy, modify, distribute, or commercialize this code for your own personal or commercial projects without explicit written permission. Only the original author retains the right to use and monetize this project.
-
-
 [![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Signetry%20Admission-purple?logo=github)](https://github.com/marketplace/actions/umbra-admission)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Latest release](https://img.shields.io/github/v/release/Signetry/action?sort=semver)](https://github.com/Signetry/action/releases)
