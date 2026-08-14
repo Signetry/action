@@ -21,8 +21,8 @@ Pin `@v1` (moving) or an exact `@v0.1.3+` tag.
 - Report/artifact filenames are `signetry-report.json`,
   `signetry-receipt.json`, `signetry-comment.md`, `signetry.sarif`; contract path
   is `.signetry/admission.yaml`.
-- Advisory reviewer workflow installs **`signetry-reviewer`** from
-  `git+https://github.com/Signetry/reviewer@v0.1.1`.
+ - Advisory reviewer workflow installs **`signetry-reviewer`** from
+   `git+https://github.com/Signetry/reviewer@v0.1.2`.
 
 ## [0.3.1] — 2026-08-03
 
