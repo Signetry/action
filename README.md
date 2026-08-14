@@ -1,6 +1,6 @@
 # Signetry Admission — GitHub Action
 
-[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Signetry%20Admission-purple?logo=github)](https://github.com/marketplace/actions/umbra-admission)
+[![GitHub Marketplace](https://img.shields.io/badge/Marketplace-Signetry%20Admission-purple?logo=github)](https://github.com/marketplace/actions/signetry-admission)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Latest release](https://img.shields.io/github/v/release/Signetry/action?sort=semver)](https://github.com/Signetry/action/releases)
 
